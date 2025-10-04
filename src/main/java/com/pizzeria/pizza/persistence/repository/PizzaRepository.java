@@ -9,4 +9,6 @@ import java.util.List;
 public interface PizzaRepository extends CrudRepository<PizzaEntity, Integer> {
     List<PizzaEntity> findAll();
     PizzaEntity findById(int idPizza);
+    PizzaEntity save(PizzaEntity pizzaEntity);
+    boolean existsById(int idPizza);
 }
