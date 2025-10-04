@@ -1,6 +1,11 @@
 package com.pizzeria.pizza.persistence.entity;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -11,16 +16,15 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 public class PizzaEntity {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_pizza", nullable = false)
     private Integer idPizza;
 
-    @Column(length = 30, nullable = false, unique = true)
+    @Column(nullable = false, length = 30, unique = true)
     private String name;
 
-    @Column(length = 150, nullable = false)
+    @Column(nullable = false, length = 150)
     private String description;
 
     @Column(nullable = false, columnDefinition = "Decimal(5,2)")
@@ -34,4 +38,5 @@ public class PizzaEntity {
 
     @Column(columnDefinition = "TINYINT", nullable = false)
     private Boolean available;
+
 }
