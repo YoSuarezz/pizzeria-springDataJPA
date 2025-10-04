@@ -11,4 +11,5 @@ public interface PizzaRepository extends CrudRepository<PizzaEntity, Integer> {
     PizzaEntity findById(int idPizza);
     PizzaEntity save(PizzaEntity pizzaEntity);
     boolean existsById(int idPizza);
+    void deleteById(int idPizza);
 }
