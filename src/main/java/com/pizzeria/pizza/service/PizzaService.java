@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 @Service
 public class PizzaService {
@@ -17,11 +19,24 @@ public class PizzaService {
     }
 
     public List<PizzaEntity> getAll(){
-        return this.pizzaRepository.findAll();
+        return StreamSupport.stream(this.pizzaRepository.findAll().spliterator(), false)
+                .collect(Collectors.toList());
+    }
+
+    public List<PizzaEntity> getAvailable(){
+        return this.pizzaRepository.findAllByAvailableTrueOrderByPrice();
+    }
+
+    public PizzaEntity getPizzaByName(String name){
+        return this.pizzaRepository.findAllByAvailableTrueAndNameIgnoreCase(name);
+    }
+
+    public List<PizzaEntity> getWith(String ingredient){
+        return this.pizzaRepository.findAllByAvailableTrueAndDescriptionContainingIgnoreCase(ingredient);
     }
 
     public PizzaEntity getById(int idPizza){
-        return this.pizzaRepository.findById(idPizza);
+        return this.pizzaRepository.findById(idPizza).orElse(null);
     }
 
     public PizzaEntity save(PizzaEntity pizzaEntity){

@@ -5,11 +5,8 @@ import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
 
-
 public interface PizzaRepository extends CrudRepository<PizzaEntity, Integer> {
-    List<PizzaEntity> findAll();
-    PizzaEntity findById(int idPizza);
-    PizzaEntity save(PizzaEntity pizzaEntity);
-    boolean existsById(int idPizza);
-    void deleteById(int idPizza);
+    List<PizzaEntity> findAllByAvailableTrueOrderByPrice();
+    PizzaEntity findAllByAvailableTrueAndNameIgnoreCase(String name);
+    List<PizzaEntity> findAllByAvailableTrueAndDescriptionContainingIgnoreCase(String description);
 }
